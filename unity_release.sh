@@ -75,14 +75,7 @@ CHANGELOG_GENERATOR_ARG="--future-release v${RELEASE_VERSION} ${CHANGELOG_GENERA
 echo -e "\n>> (4/8) Generate change log... ${CHANGELOG_GENERATOR_ARG}"
 github_changelog_generator ${CHANGELOG_GENERATOR_ARG}
 
-if [ -f CHANGELOG.md ]; then
-  echo -p "File!"
-  git diff -- CHANGELOG.md
-else
-  echo -p "Symbol!"
-  git diff -- `readlink CHANGELOG.md`
-fi
-
+[ -L CHANGELOG.md ] && git diff -- `readlink CHANGELOG.md` || git diff -- CHANGELOG.md
 read -p "[? Is the change log correct? (y/N):" yn
 case "$yn" in [yY]*) ;; *) exit ;; esac
 echo -e ">> OK"
