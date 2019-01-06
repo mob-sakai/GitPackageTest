@@ -1,0 +1,16 @@
+{
+	"name": "com.coffee.package-a",
+	"displayName": "Package A",
+	"description": "",
+	"version": "0.1.0",
+	"unity": "2018.3",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mob-sakai/GitPackageTest.git"
+	},
+	"author": "mob-sakai <sakai861104@gmail.com> (https://github.com/mob-sakai)",
+	"dependencies": {
+    "com.coffee.core-a": "https://github.com/mob-sakai/GitPackageTest.git#core-a-0.1.0"
+	}
+}

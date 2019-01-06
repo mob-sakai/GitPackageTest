@@ -1,0 +1,14 @@
+{
+    "name": "Coffee.PackageA",
+    "references": [
+        "Coffee.CoreA"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
