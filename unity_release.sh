@@ -74,7 +74,12 @@ CHANGELOG_GENERATOR_ARG=`grep -o -e ".*git\"$" package.json | sed -e "s/^.*\/\([
 CHANGELOG_GENERATOR_ARG="--future-release v${RELEASE_VERSION} ${CHANGELOG_GENERATOR_ARG}"
 echo -e "\n>> (4/8) Generate change log... ${CHANGELOG_GENERATOR_ARG}"
 github_changelog_generator ${CHANGELOG_GENERATOR_ARG}
-git diff -- CHANGELOG.md
+if [ -f CHANGELOG.md ]; then
+  git diff -- CHANGELOG.md
+else
+  git diff -- `readlink CHANGELOG.md`
+fi
+
 read -p "[? Is the change log correct? (y/N):" yn
 case "$yn" in [yY]*) ;; *) exit ;; esac
 echo -e ">> OK"
