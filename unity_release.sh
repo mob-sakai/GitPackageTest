@@ -31,8 +31,9 @@ echo -e ">> OK"
 
 # 2. << Update version in package.json >>
 echo -e "\n>> (2/8) Update version... package.json"
+[ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
 git checkout -B release develop
-sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" package.json
+sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
 echo -e ">> OK"
 
 
@@ -94,8 +95,8 @@ echo -e ">> OK"
 
 # 6. << Commit release files >>
 echo -e "\n>> (6/8) Commit release files..."
-git add CHANGELOG.md -f
-git add package.json -f
+[ -L CHANGELOG.md ] && git add -- `readlink CHANGELOG.md` -f || git add -- CHANGELOG.md -f
+[ -L package.json ] && git add -- `readlink package.json` -f || git add -- package.json -f
 git commit -m "update change log"
 echo -e ">> OK"
 
