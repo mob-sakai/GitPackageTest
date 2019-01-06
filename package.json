@@ -2,7 +2,7 @@
 	"name": "coffee.git-package-test",
 	"displayName": "Git Package Test",
 	"description": "",
-	"version": "0.1.0",
+	"version": "0.0.0",
 	"unity": "2018.3",
 	"license": "MIT",
 	"repository": {
