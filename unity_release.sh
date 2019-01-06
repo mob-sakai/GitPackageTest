@@ -34,6 +34,7 @@ echo -e "\n>> (2/8) Update version... package.json"
 [ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
 git checkout -B release develop
 sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
+rm "${PKG_JSON_PATH}-e"
 echo -e ">> OK"
 
 
