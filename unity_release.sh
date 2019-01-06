@@ -95,8 +95,8 @@ echo -e ">> OK"
 
 # 6. << Commit release files >>
 echo -e "\n>> (6/8) Commit release files..."
-[ -L CHANGELOG.md ] && git add -- `readlink CHANGELOG.md` -f || git add -- CHANGELOG.md -f
-[ -L package.json ] && git add -- `readlink package.json` -f || git add -- package.json -f
+[ -L CHANGELOG.md ] && git add -- "`readlink CHANGELOG.md`" || git add -- CHANGELOG.md
+[ -L package.json ] && git add -- "`readlink package.json`" || git add -- package.json
 git commit -m "update change log"
 echo -e ">> OK"
 
