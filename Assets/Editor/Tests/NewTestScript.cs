@@ -12,6 +12,7 @@ namespace Tests
         [Test]
         public void NewTestScriptSimplePasses()
         {
+            Assert.IsTrue(false);
             // Use the Assert class to test conditions
         }
 
