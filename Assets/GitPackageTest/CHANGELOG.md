@@ -1,8 +1,8 @@
 # Changelog
 
-## [v0.1.0](https://github.com/mob-sakai/GitPackageTest/tree/v0.1.0) (2019-01-06)
+## [0.1.0](https://github.com/mob-sakai/GitPackageTest/tree/0.1.0) (2019-01-07)
 
-[Full Changelog](https://github.com/mob-sakai/GitPackageTest/compare/3f0910720cc8bf10b9c737e1a9b6e3833e5bb6f3...v0.1.0)
+[Full Changelog](https://github.com/mob-sakai/GitPackageTest/compare/3f0910720cc8bf10b9c737e1a9b6e3833e5bb6f3...0.1.0)
 
 Add `"coffee.git-package-test": "https://github.com/mob-sakai/GitPackageTest.git#0.1.0",` to install.
 
