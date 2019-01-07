@@ -47,14 +47,23 @@ UNITY_ARGS="-quit -batchmode -projectPath `pwd` -logFile $UNITY_LOG"
 UNITY_PACKAGE_SRC=`node -pe 'require("./package.json").src'`
 UNITY_PACKAGE_NAME="${PACKAGE_NAME}_${RELEASE_VERSION}.unitypackage"
 echo -e "\n>> (3/8) Check exporting package is available..."
-echo -e "Version: $UNITY_VER ($UNITY_EDITOR)"
-echo -e "Package Source: $UNITY_PACKAGE_SRC"
+echo -e "Unity version: $UNITY_VER ($UNITY_EDITOR)"
+echo -e "Unity args: $UNITY_ARGS"
+echo -e "Unity log: $UNITY_LOG"
+echo -e "Package source: $UNITY_PACKAGE_SRC"
+echo -e "Export package name: $UNITY_PACKAGE_NAME"
 
 #   3-1. Is src directory exist?
 [ ! -d "$UNITY_PACKAGE_SRC" ] && echo -e "\n>> Error : $UNITY_PACKAGE_SRC is not exist." && exit
 
-#   3-2. Is runtime compile successfully?
+#   3-2. Is editor tests successfully?
 set +e
+"$UNITY_EDITOR" $UNITY_ARGS -runEditorTests
+[ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
+echo -e ">> OK"
+exit
+
+#   3-2. Is runtime compile successfully?
 if [ "$EDITOR_ONLY" != "true" ]; then
   echo -e "\n>> compile for runtime..."
   "$UNITY_EDITOR" $UNITY_ARGS -buildOSX64Player `pwd`/build.app
