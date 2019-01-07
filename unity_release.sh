@@ -30,12 +30,12 @@ echo -e ">> OK"
 
 
 # 2. << Update version in package.json >>
-echo -e "\n>> (2/8) Update version... package.json"
-[ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
-git checkout -B release develop
-sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
-rm "${PKG_JSON_PATH}-e"
-echo -e ">> OK"
+# echo -e "\n>> (2/8) Update version... package.json"
+# [ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
+# git checkout -B release develop
+# sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
+# rm "${PKG_JSON_PATH}-e"
+# echo -e ">> OK"
 
 
 
@@ -58,7 +58,7 @@ echo -e "Export package name: $UNITY_PACKAGE_NAME"
 
 #   3-2. Is editor tests successfully?
 set +e
-"$UNITY_EDITOR" $UNITY_ARGS -runEditorTests
+"$UNITY_EDITOR" $UNITY_ARGS -runEditorTests -editorTestsResultFile "`pwd`/test.log"
 [ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
 echo -e ">> OK"
 exit
@@ -66,7 +66,7 @@ exit
 #   3-2. Is runtime compile successfully?
 if [ "$EDITOR_ONLY" != "true" ]; then
   echo -e "\n>> compile for runtime..."
-  "$UNITY_EDITOR" $UNITY_ARGS -buildOSX64Player `pwd`/build.app
+  "$UNITY_EDITOR" $UNITY_ARGS -buildOSX64Player "`pwd`/build.app"
   [ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
   echo -e ">> OK"
 fi
