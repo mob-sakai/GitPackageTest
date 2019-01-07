@@ -8,6 +8,6 @@ class SimpleRotation : MonoBehaviour
     {
         var rot = Quaternion.AngleAxis(angularVelocity * Time.deltaTime, Vector3.up);
         transform.localRotation = rot * transform.localRotation;
-		Debug.Log ("bbb");
+		Debug.Log ("ccc");
     }
 }
