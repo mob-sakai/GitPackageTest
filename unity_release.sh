@@ -128,8 +128,11 @@ git push origin develop
 #   7-2. Split to upm
 if [ "$UNITY_PACKAGE_MANAGER" == "true" ]; then
   git subtree split --prefix="$UNITY_PACKAGE_SRC" -b upm
-  git checkout upm
-  git push origin upm
+  git checkout upm -f
+  git reset --soft origin/upm
+  git commit -m "$RELEASE_VERSION"
+  git tag "$RELEASE_VERSION"
+  git push origin upm -t
 fi
 
 echo -e ">> OK"
