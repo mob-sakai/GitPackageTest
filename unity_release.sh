@@ -43,7 +43,7 @@ echo -e ">> OK"
 UNITY_VER=`sed -e "s/m_EditorVersion: \(.*\)/\1/g" ProjectSettings/ProjectVersion.txt`
 UNITY_EDITOR="/Applications/Unity/Hub/Editor/${UNITY_VER}/Unity.app/Contents/MacOS/Unity"
 UNITY_LOG="unity.log"
-UNITY_ARGS="-quit -batchmode -projectPath `pwd` -logFile $UNITY_LOG"
+UNITY_ARGS="-batchmode -projectPath `pwd` -logFile $UNITY_LOG"
 UNITY_PACKAGE_SRC=`node -pe 'require("./package.json").src'`
 UNITY_PACKAGE_NAME="${PACKAGE_NAME}_${RELEASE_VERSION}.unitypackage"
 echo -e "\n>> (3/8) Check exporting package is available..."
@@ -66,14 +66,14 @@ exit
 #   3-2. Is runtime compile successfully?
 if [ "$EDITOR_ONLY" != "true" ]; then
   echo -e "\n>> compile for runtime..."
-  "$UNITY_EDITOR" $UNITY_ARGS -buildOSX64Player "`pwd`/build.app"
+  "$UNITY_EDITOR" -quit $UNITY_ARGS -buildOSX64Player "`pwd`/build.app"
   [ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
   echo -e ">> OK"
 fi
 
 #   3-3. Is exporting package successfully?
 echo -e "\n>> Pre export package..."
-"$UNITY_EDITOR" $UNITY_ARGS -exportpackage $UNITY_PACKAGE_SRC $UNITY_PACKAGE_NAME
+"$UNITY_EDITOR" -quit $UNITY_ARGS -exportpackage $UNITY_PACKAGE_SRC $UNITY_PACKAGE_NAME
 [ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
 echo -e ">> OK"
 set -e
