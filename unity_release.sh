@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+# NOTE: This script uses following apps:
+#   github_changelog_generator
+#   gh-release
 # NOTE: Run the following command at the prompt
 #   bash <(curl -sL 'https://gist.github.com/mob-sakai/a883999a32dd8b1927639e46b3cd6801/raw/unity_release.sh')
 # NOTE: Set an environment variable `CHANGELOG_GITHUB_TOKEN` by running the following command at the prompt, or by adding it to your shell profile (e.g., ~/.bash_profile or ~/.zshrc):
@@ -30,12 +33,12 @@ echo -e ">> OK"
 
 
 # 2. << Update version in package.json >>
-# echo -e "\n>> (2/8) Update version... package.json"
-# [ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
-# git checkout -B release develop
-# sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
-# rm "${PKG_JSON_PATH}-e"
-# echo -e ">> OK"
+echo -e "\n>> (2/8) Update version... package.json"
+[ -L package.json ] && PKG_JSON_PATH=`readlink package.json` || PKG_JSON_PATH=package.json
+git checkout -B release develop
+sed -i -e "s/\"version\": \(.*\)/\"version\": \"${RELEASE_VERSION}\",/g" "${PKG_JSON_PATH}"
+rm "${PKG_JSON_PATH}-e"
+echo -e ">> OK"
 
 
 
@@ -56,14 +59,8 @@ echo -e "Export package name: $UNITY_PACKAGE_NAME"
 #   3-1. Is src directory exist?
 [ ! -d "$UNITY_PACKAGE_SRC" ] && echo -e "\n>> Error : $UNITY_PACKAGE_SRC is not exist." && exit
 
-#   3-2. Is editor tests successfully?
-set +e
-"$UNITY_EDITOR" $UNITY_ARGS -runEditorTests -editorTestsResultFile "`pwd`/test.log"
-[ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
-echo -e ">> OK"
-exit
-
 #   3-2. Is runtime compile successfully?
+set +e
 if [ "$EDITOR_ONLY" != "true" ]; then
   echo -e "\n>> compile for runtime..."
   "$UNITY_EDITOR" -quit $UNITY_ARGS -buildOSX64Player "`pwd`/build.app"
@@ -71,7 +68,13 @@ if [ "$EDITOR_ONLY" != "true" ]; then
   echo -e ">> OK"
 fi
 
-#   3-3. Is exporting package successfully?
+#   3-3. Is editor tests successfully?
+"$UNITY_EDITOR" $UNITY_ARGS -runEditorTests -editorTestsResultFile "`pwd`/test.log"
+[ $? != 0 ] && echo -e "\n>> Test failure : See test.log for further details." && exit
+echo -e ">> OK"
+exit
+
+#   3-4. Is exporting package successfully?
 echo -e "\n>> Pre export package..."
 "$UNITY_EDITOR" -quit $UNITY_ARGS -exportpackage $UNITY_PACKAGE_SRC $UNITY_PACKAGE_NAME
 [ $? != 0 ] && echo -e "\n>> Error : \n`cat $UNITY_LOG | grep -E ': error CS|Fatal Error'`" && exit
