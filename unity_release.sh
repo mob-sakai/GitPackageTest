@@ -72,7 +72,6 @@ fi
 "$UNITY_EDITOR" $UNITY_ARGS -runEditorTests -editorTestsResultFile "`pwd`/test.log"
 [ $? != 0 ] && echo -e "\n>> Test failure : See test.log for further details." && exit
 echo -e ">> OK"
-exit
 
 #   3-4. Is exporting package successfully?
 echo -e "\n>> Pre export package..."
