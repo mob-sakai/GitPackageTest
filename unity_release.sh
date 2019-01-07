@@ -28,6 +28,12 @@ case "$yn" in [yY]*) UNITY_PACKAGE_MANAGER=true;; *) ;; esac
 echo -e ">> OK"
 
 
+#   7-2. Split to upm
+if [ "$UNITY_PACKAGE_MANAGER" != "true" ]; then
+  git subtree split --prefix="$UNITY_PACKAGE_SRC" -b upm
+  git checkout upm
+fi
+exit
 
 # 2. << Update version in package.json >>
 echo -e "\n>> (2/8) Update version... package.json"
