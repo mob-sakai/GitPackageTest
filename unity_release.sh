@@ -133,6 +133,7 @@ if [ "$UNITY_PACKAGE_MANAGER" == "true" ]; then
   git commit -m "$RELEASE_VERSION"
   git tag "$RELEASE_VERSION"
   git push origin upm -t
+  git checkout develop
 fi
 
 echo -e ">> OK"
@@ -141,7 +142,8 @@ echo -e ">> OK"
 
 # 8. << Upload unitypackage and release on Github >>
 echo -e "\n>> (8/8) Releasing..."
-gh-release --assets $UNITY_PACKAGE_NAME --name $RELEASE_VERSION --tag_name $RELEASE_VERSION
+[ "$UNITY_PACKAGE_MANAGER" == "true" ] ?? COMMITISH="upm" || COMMITISH="master"
+gh-release --yes --assets $UNITY_PACKAGE_NAME --name $RELEASE_VERSION --tag_name $RELEASE_VERSION --target_commitish $COMMITISH
 echo -e ">> OK"
 
 
