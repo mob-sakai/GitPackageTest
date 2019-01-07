@@ -45,7 +45,7 @@ UNITY_EDITOR="/Applications/Unity/Hub/Editor/${UNITY_VER}/Unity.app/Contents/Mac
 UNITY_LOG="unity.log"
 UNITY_ARGS="-quit -batchmode -projectPath `pwd` -logFile $UNITY_LOG"
 UNITY_PACKAGE_SRC=`node -pe 'require("./package.json").src'`
-UNITY_PACKAGE_NAME="${PACKAGE_NAME}_v${RELEASE_VERSION}.unitypackage"
+UNITY_PACKAGE_NAME="${PACKAGE_NAME}_${RELEASE_VERSION}.unitypackage"
 echo -e "\n>> (3/8) Check exporting package is available..."
 echo -e "Version: $UNITY_VER ($UNITY_EDITOR)"
 echo -e "Package Source: $UNITY_PACKAGE_SRC"
@@ -73,7 +73,7 @@ set -e
 
 # 4. << Generate change log >>
 CHANGELOG_GENERATOR_ARG=`grep -o -e ".*git\"$" package.json | sed -e "s/^.*\/\([^\/]*\)\/\([^\/]*\).git.*$/--user \1 --project \2/"`
-CHANGELOG_GENERATOR_ARG="--future-release v${RELEASE_VERSION} ${CHANGELOG_GENERATOR_ARG}"
+CHANGELOG_GENERATOR_ARG="--future-release ${RELEASE_VERSION} ${CHANGELOG_GENERATOR_ARG}"
 echo -e "\n>> (4/8) Generate change log... ${CHANGELOG_GENERATOR_ARG}"
 github_changelog_generator ${CHANGELOG_GENERATOR_ARG}
 
@@ -125,7 +125,7 @@ echo -e ">> OK"
 
 # 8. << Upload unitypackage and release on Github >>
 echo -e "\n>> (8/8) Releasing..."
-gh-release --assets $UNITY_PACKAGE_NAME -n $RELEASE_VERSION
+gh-release --assets $UNITY_PACKAGE_NAME --name $RELEASE_VERSION --tag_name $RELEASE_VERSION
 echo -e ">> OK"
 
 
