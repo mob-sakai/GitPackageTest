@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mob-sakai/GitPackageTest.git"
+		"url": "git+https://github.com/cnheider/GitPackageTest.git"
 	},
 	"src": "Assets/GitPackageTest",
 	"author": "cnheider <mrnaah@gmail.com> (https://github.com/cnheider)",
