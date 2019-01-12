@@ -1,8 +1,8 @@
 {
-	"name": "com.coffee.upm-git-extension",
-	"displayName": "UPM Git Extension",
+	"name": "com.cnheider.gitpackagetest",
+	"displayName": "Git Package Test",
 	"description": "",
-	"version": "0.4.0",
+	"version": "0.6.0",
 	"unity": "2018.3",
 	"license": "MIT",
 	"repository": {
@@ -10,7 +10,7 @@
 		"url": "git+https://github.com/mob-sakai/GitPackageTest.git"
 	},
 	"src": "Assets/GitPackageTest",
-	"author": "mob-sakai <sakai861104@gmail.com> (https://github.com/mob-sakai)",
+	"author": "cnheider <mrnaah@gmail.com> (https://github.com/cnheider)",
 	"dependencies": {
 	}
 }
