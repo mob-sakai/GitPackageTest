@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class SimpleRotation : MonoBehaviour
+class SimpleRotation_gh : MonoBehaviour
 {
     public float angularVelocity = 10;
 
