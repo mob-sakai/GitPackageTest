@@ -1,6 +1,6 @@
 {
-	"name": "com.coffee.upm-git-extension",
-	"displayName": "UPM Git Extension",
+	"name": "com.coffee.upm-git-extension-test-github",
+	"displayName": "UPM Git Extension Test (GitHub)",
 	"description": "",
 	"version": "0.4.0",
 	"unity": "2018.3",
