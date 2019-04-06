@@ -2,7 +2,7 @@
 	"name": "com.coffee.test-core",
 	"displayName": "Test Core Package",
 	"description": "",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"unity": "2018.3",
 	"license": "MIT",
 	"repository": {
