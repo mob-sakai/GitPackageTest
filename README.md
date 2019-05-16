@@ -33,6 +33,9 @@ project
 5. Reopen the project.
 6. The dependency is resolved successfully! :)  
 ![success](https://user-images.githubusercontent.com/12690315/57830788-2e0c7180-77ee-11e9-9228-50bf5976c876.png)
+7. Delete `Library` directory in the project and reopen the project.
+2. When `Unity Package Manager Error` window is opens, click `Continue`.
+6. Ofcause, the dependency is resolved successfully! :)
 
 
 
